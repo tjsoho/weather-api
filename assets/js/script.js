@@ -1,7 +1,6 @@
 var searchAreaEl = document.querySelector("#citySearch");
-var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=$85c75899f58ea410286679d581b73dd2`;
-
-
+var cityFormEl = document.querySelector("#city-form");
+var weatherDataContainerEl = document.querySelector("#weather-data-container");
 
 // form submit event to take the city name from the search box
 var formSubmitHandler = function (event) {
@@ -17,18 +16,39 @@ var formSubmitHandler = function (event) {
     }
 };
 
+// function to get the weather data
 var getCityWeather = function (city) {
-    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=$' + city + '&units=metric&appid=$85c75899f58ea410286679d581b73dd2`;
+    var apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=e59b9cf3bb219f49c87ba0bfb16a59e6`;
 
     fetch(apiUrl)
         .then(function (response) {
-            if (response.ok) {
-                response.json().then(function (data) {
-                    displayWeather(data, city);
-                });
-            } else {
-                alert("Error: " + response.statusText);
-            }
-        }
-        )
+            return response.json();
+        })
+        .then(function (data) {
+            document.getElementById("weather-data-container").style.visibility = 'vissible'
+
+            var cityNameEl = document.createElement('h2');
+            cityNameEl.textContent = data.name;
+
+            var tempEl = document.createElement('p');
+            tempEl.textContent = `Temperature: ${data.main.temp} °C`;
+
+            var humidityEl = document.createElement('p');
+            humidityEl.textContent = `Humidity: ${data.main.humidity}%`;
+
+            var windEl = document.createElement('p');
+            windEl.textContent = `Wind Speed: ${data.wind.speed} m/s`;
+
+            weatherDataContainerEl.innerHTML = ''; // clear previous weather data
+            weatherDataContainerEl.appendChild(cityNameEl);
+            weatherDataContainerEl.appendChild(tempEl);
+            weatherDataContainerEl.appendChild(humidityEl);
+            weatherDataContainerEl.appendChild(windEl);
+        })
+        .catch(function (error) {
+            console.error(error);
+            alert("Unable to retrieve weather data.");
+        });
 };
+
+cityFormEl.addEventListener("submit", formSubmitHandler);

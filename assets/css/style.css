@@ -184,6 +184,15 @@ p {
     border-radius: var(--border-radius);
 }
 
+/* Weather Data Styling */
+#weather-data-container {
+    background-color: white;
+    border: 2px solid var(--light-dark);
+    padding: 20px;
+    border-radius: var(--border-radius);
+     visibility: hidden;
+}
+
 /* HEIGHT / WIDTH UTILS */
 .min-100-vh {
     min-height: 100vh;
