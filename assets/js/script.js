@@ -25,7 +25,6 @@ var getCityWeather = function (city) {
             return response.json();
         })
         .then(function (data) {
-            document.getElementById("weather-data-container").style.visibility = 'vissible'
 
             var cityNameEl = document.createElement('h2');
             cityNameEl.textContent = data.name;
@@ -51,4 +50,9 @@ var getCityWeather = function (city) {
         });
 };
 
+// event listener for the form submit with an if statement to make the weather-data-container visible
 cityFormEl.addEventListener("submit", formSubmitHandler);
+if (cityFormEl) {
+    weatherDataContainerEl.style.display = "visible";
+}
+
