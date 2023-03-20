@@ -13,6 +13,7 @@ var formSubmitHandler = function (event) {
 
     if (citySearch) {
         getCityWeather(citySearch);
+        getFiveDayForecast(citySearch);
         searchAreaEl.value = "";
 
         // Store every city name in localStorage keeping the previous city name
@@ -85,10 +86,10 @@ var getFiveDayForecast = function (city) {
         })
         .then(function (data) {
             // create 5 cards for the 5 day forecast with the date, weather icon, temperature and humidity
-            for (var i = 0; i < 5; i++) {
+            for (var i = 0; i < 40; i += 8) {
                 var forecastDate = data.list[i].dt_txt;
                 var forecastDateEl = document.createElement("h5");
-                forecastDateEl.textContent = forecastDate;
+                forecastDateEl.textContent = dayjs(forecastDate).format("dddd DD");
 
                 var forecastIcon = document.createElement("img");
                 forecastIcon.setAttribute("src", `http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png`);
@@ -118,5 +119,6 @@ var getFiveDayForecast = function (city) {
 
 
 // event listener for the form submit with an if statement to make the weather-data-container visible
-cityFormEl.addEventListener("submit", formSubmitHandler, getFiveDayForecast);
+cityFormEl.addEventListener("submit", formSubmitHandler);
+
 

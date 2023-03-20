@@ -13,7 +13,9 @@
 
 
 body {
-    background-color: var(--primary);
+    background: linear-gradient(to bottom, white 50%, rgba(255, 255, 255, 0)),
+        url("..//images/sand-water-the-ocean-the-bottom-wallpaper-preview.jpg");
+    background-size: cover;
     margin: 0;
     padding: 0;
     font-family: 'IBM Plex Sans', sans-serif;
