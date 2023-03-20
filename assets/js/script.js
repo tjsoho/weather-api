@@ -63,6 +63,7 @@ var getCityWeather = function (city) {
 
             weatherDataContainerEl.innerHTML = ''; // clear previous weather data
             weatherDataContainerEl.appendChild(cityNameEl);
+            weatherDataContainerEl.appendChild(weatherIcon);
             weatherDataContainerEl.appendChild(tempEl);
             weatherDataContainerEl.appendChild(humidityEl);
             weatherDataContainerEl.appendChild(windEl);

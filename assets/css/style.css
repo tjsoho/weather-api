@@ -11,6 +11,15 @@
     box-sizing: border-box;
 }
 
+.hero-image {
+    background-size: cover;
+    background-position: fill;
+    background-repeat: no-repeat;
+    height: 50vh;
+    width: 100%;
+    position: relative;
+}
+
 body {
     background-color: var(--primary);
     margin: 0;
@@ -153,6 +162,7 @@ p {
 }
 
 .card-header {
+    background-image: ;
     color: var(--primary);
     background-color: var(--dark);
     padding: 2.5%;
