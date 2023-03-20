@@ -190,7 +190,7 @@ p {
     border: 2px solid var(--light-dark);
     padding: 20px;
     border-radius: var(--border-radius);
-     visibility: hidden;
+    display: none;
 }
 
 /* HEIGHT / WIDTH UTILS */

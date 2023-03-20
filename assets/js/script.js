@@ -11,6 +11,8 @@ var formSubmitHandler = function (event) {
     if (citySearch) {
         getCityWeather(citySearch);
         searchAreaEl.value = "";
+    
+        weatherDataContainerEl.style.display = "block"; // show the weather data container when data is added
     } else {
         alert("Please enter a city name");
     }
@@ -52,7 +54,4 @@ var getCityWeather = function (city) {
 
 // event listener for the form submit with an if statement to make the weather-data-container visible
 cityFormEl.addEventListener("submit", formSubmitHandler);
-if (cityFormEl) {
-    weatherDataContainerEl.style.display = "visible";
-}
 
