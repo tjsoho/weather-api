@@ -11,14 +11,6 @@
     box-sizing: border-box;
 }
 
-.hero-image {
-    background-size: cover;
-    background-position: fill;
-    background-repeat: no-repeat;
-    height: 50vh;
-    width: 100%;
-    position: relative;
-}
 
 body {
     background-color: var(--primary);
@@ -102,6 +94,8 @@ p {
 }
 
 .hero {
+    background-image: url("../images/6f4e87c57bad8495f4dd2ae9d5e24277.jpg");
+    background-size: cover;
     padding: 3% 4%;
     background-color: var(--dark);
     color: var(--primary);

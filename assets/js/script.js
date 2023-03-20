@@ -2,6 +2,7 @@ var searchAreaEl = document.querySelector("#citySearch");
 var cityFormEl = document.querySelector("#city-form");
 var weatherDataContainerEl = document.querySelector("#weather-data-container");
 var citySearchContainerEl = document.querySelector(".searchHistory");
+var fiveDayForecastEl = document.querySelector("#five-day-forecast");
 
 
 // form submit event to take the city name from the search box
@@ -74,6 +75,48 @@ var getCityWeather = function (city) {
         });
 };
 
+// function to get 5 day forecast to be called in the getCityWeather function and display the data in the fiveDayForecastEl
+var getFiveDayForecast = function (city) {
+    var forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&APPID=e59b9cf3bb219f49c87ba0bfb16a59e6`;
+
+    fetch(forecastApiUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            // create 5 cards for the 5 day forecast with the date, weather icon, temperature and humidity
+            for (var i = 0; i < 5; i++) {
+                var forecastDate = data.list[i].dt_txt;
+                var forecastDateEl = document.createElement("h5");
+                forecastDateEl.textContent = forecastDate;
+
+                var forecastIcon = document.createElement("img");
+                forecastIcon.setAttribute("src", `http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png`);
+
+                var forecastTemp = document.createElement("p");
+                forecastTemp.textContent = `Temp: ${data.list[i].main.temp} °C`;
+
+                var forecastHumidity = document.createElement("p");
+                forecastHumidity.textContent = `Humidity: ${data.list[i].main.humidity}%`;
+
+                var forecastCard = document.createElement("div");
+                forecastCard.classList = "card text-white bg-primary mb-3";
+
+                forecastCard.appendChild(forecastDateEl);
+                forecastCard.appendChild(forecastIcon);
+                forecastCard.appendChild(forecastTemp);
+                forecastCard.appendChild(forecastHumidity);
+
+                fiveDayForecastEl.appendChild(forecastCard);
+            }
+        })
+        .catch(function (error) {
+            console.error(error);
+            alert("Unable to retrieve 5 day forecast data.");
+        });
+};
+
+
 // event listener for the form submit with an if statement to make the weather-data-container visible
-cityFormEl.addEventListener("submit", formSubmitHandler);
+cityFormEl.addEventListener("submit", formSubmitHandler, getFiveDayForecast);
 
