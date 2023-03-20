@@ -1,6 +1,8 @@
 var searchAreaEl = document.querySelector("#citySearch");
 var cityFormEl = document.querySelector("#city-form");
 var weatherDataContainerEl = document.querySelector("#weather-data-container");
+var citySearchContainerEl = document.querySelector(".searchHistory");
+
 
 // form submit event to take the city name from the search box
 var formSubmitHandler = function (event) {
@@ -11,7 +13,23 @@ var formSubmitHandler = function (event) {
     if (citySearch) {
         getCityWeather(citySearch);
         searchAreaEl.value = "";
-    
+
+        // Store every city name in localStorage keeping the previous city name
+        localStorage.setItem("city", citySearch);
+
+        //Retrieve the value of citySearch from localStorage and display it in a new button element indide the search history
+        var citySearchHistory = localStorage.getItem("city");
+        var citySearchHistoryEl = document.createElement("button");
+        citySearchHistoryEl.textContent = citySearchHistory;
+        citySearchHistoryEl.classList = "btn btn-primary btn-block";
+        document.querySelector(".searchHistory").appendChild(citySearchHistoryEl);
+
+        // event listener for the search history buttons to bring back the weather data
+        citySearchHistoryEl.addEventListener("click", function () {
+            getCityWeather(citySearchHistory);
+        });
+
+
         weatherDataContainerEl.style.display = "block"; // show the weather data container when data is added
     } else {
         alert("Please enter a city name");
@@ -30,6 +48,9 @@ var getCityWeather = function (city) {
 
             var cityNameEl = document.createElement('h2');
             cityNameEl.textContent = data.name;
+
+            var weatherIcon = document.createElement("img");
+            weatherIcon.setAttribute("src", `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`);
 
             var tempEl = document.createElement('p');
             tempEl.textContent = `Temperature: ${data.main.temp} °C`;
