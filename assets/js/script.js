@@ -101,7 +101,7 @@ var getFiveDayForecast = function (city) {
                 forecastHumidity.textContent = `Humidity: ${data.list[i].main.humidity}%`;
 
                 var forecastCard = document.createElement("div");
-                forecastCard.classList = "card text-white bg-primary mb-3";
+                forecastCard.classList = "forecast-card mb-12";
 
                 forecastCard.appendChild(forecastDateEl);
                 forecastCard.appendChild(forecastIcon);
