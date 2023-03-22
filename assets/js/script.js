@@ -86,10 +86,15 @@ var getFiveDayForecast = function (city) {
         })
         .then(function (data) {
             // create 5 cards for the 5 day forecast with the date, weather icon, temperature and humidity
+
+            //clear previous forecast data
+            fiveDayForecastEl.innerHTML = '';
+
             for (var i = 0; i < 40; i += 8) {
                 var forecastDate = data.list[i].dt_txt;
                 var forecastDateEl = document.createElement("h5");
                 forecastDateEl.textContent = dayjs(forecastDate).format("dddd DD");
+                forecastDateEl.classList = "forecast-date";
 
                 var forecastIcon = document.createElement("img");
                 forecastIcon.setAttribute("src", `http://openweathermap.org/img/wn/${data.list[i].weather[0].icon}.png`);
