@@ -90,6 +90,8 @@ var getFiveDayForecast = function (city) {
             //clear previous forecast data
             fiveDayForecastEl.innerHTML = '';
 
+            //when previous forecast data is cleared, create new forecast data
+
             for (var i = 0; i < 40; i += 8) {
                 var forecastDate = data.list[i].dt_txt;
                 var forecastDateEl = document.createElement("h5");
@@ -114,6 +116,7 @@ var getFiveDayForecast = function (city) {
                 forecastCard.appendChild(forecastHumidity);
 
                 fiveDayForecastEl.appendChild(forecastCard);
+
             }
         })
         .catch(function (error) {
@@ -121,6 +124,10 @@ var getFiveDayForecast = function (city) {
             alert("Unable to retrieve 5 day forecast data.");
         });
 };
+
+// function to get the 5day forecast data for the city name in the search history
+// if previous search city is clicked in the search history, the weather data and 5 day forecast data will be displayed
+//var getCityWeatherHistory = function (city) {
 
 
 // event listener for the form submit with an if statement to make the weather-data-container visible
